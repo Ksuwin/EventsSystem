@@ -1,0 +1,20 @@
+<%- layout('layout.ejs') %>
+<% if (error) { %>
+	<h4 class="error"><%- error.errmsg%></h4>
+<% } else { %>
+<% if (action === 'delete'){%>
+  <h4 class="successful"><% if (current === 1) { %>Event <% } %><% if (current === 2) { %>Activity <% } %><% if (current === 2) { %>'<%-result.description%>'<% } %> is successfully deleted. </h4>
+<% }%>  
+<% if (action === 'add'){%>
+  <h4 class="successful"><% if (current === 1) { %>Event <% } %><% if (current === 2) { %>Activity <% } %><% if (current === 2) { %>'<%-result.description%>'<% } %> is successfully added. </h4>
+<% }%>  
+<% if (action === 'update'){%>
+  <h4 class="successful"><% if (current === 1) { %>Event <% } %><% if (current === 2) { %>Activity <% } %><% if (current === 2) { %>'<%-result.description%>'<% } %> is successfully updated. </h4>
+<% }%>  
+<% if (current === 1) { %>
+  <h4 style="padding-top:20px"><a href="/event">Refresh Events</a></h4>
+<% } %>  
+<% if (current === 2) { %>
+  <h4 style="padding-top:20px"><a href="/activity">Refresh Activities</a></h4>
+<% } %>  
+<% } %>

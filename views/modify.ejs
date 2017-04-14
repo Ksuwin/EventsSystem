@@ -1,0 +1,93 @@
+<%- layout('layout.ejs') %>
+<h4 class="page-header"><%- the_title %></h4>
+<% if (error) { %>
+    <h4 class="error"><%- error.errmsg%></h4>
+<% } else { %>
+<form method="post" action=<%- path %>>
+    <div class="form-group">
+        <label>Activity Name</label>
+        <select class="form-control" name="activityId" required>
+          <% if (!event) { %><option></option><% } %>     
+          <% for(var i=0; i < activities.length; i++) { %>
+            <% if (event) { %>
+              <option value=<%- activities[i]._id %> <% if (String(activities[i]._id) === String(event.activity)) { %> selected<% } %>><%- activities[i].description %></option>
+            <% } else {%>  
+              <option value=<%- activities[i]._id %>><%- activities[i].description %></option>                
+            <% } %>
+          <% }%>  
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Event Date</label>
+        <% if (event) { %>
+          <input class="form-control" type="text" value=<%- event.date %> placeholder="mm/dd/yyyy" id="datepicker" name="date" required>         
+        <% } else { %>
+          <input class="form-control" type="text" placeholder="mm/dd/yyyy" id="datepicker" name="date" required>
+        <% } %>  
+    </div>
+    <div class="form-group">
+        <label>Start Hour</label>
+        <% if (event) { %>    
+          <input class="form-control" type="text" id="starttimepicker" name="startHour" value=<%- event.startHour %> required> 
+        <% } else { %>
+          <input class="form-control" type="text" id="starttimepicker" name="startHour" required>
+        <% } %>          
+    </div>
+    <div class="form-group">
+        <label>End Hour</label>
+        <% if (event) { %>    
+          <input class="form-control" type="text" id="endtimepicker" name="endHour" value=<%- event.endHour %> required> 
+        <% } else { %>
+          <input class="form-control" type="text" id="endtimepicker" name="endHour" required>
+        <% } %>           
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+          <% if (event) { %>           
+            <label><input type="checkbox" name="isActive" id="active" <% if (event.isActive) { %> checked <% } %>>Active</label>
+          <% } else { %>
+            <label><input type="checkbox" name="isActive" id="active" checked>Active</label> 
+          <% } %>                    
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success"><% if (event) { %>Update Event <%} else { %> Add Event <% } %></button>
+    <a href="/event" class="btn btn-success">Cancel</a>
+</form>
+<% } %>
+ <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+
+    $('#starttimepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 5,
+        minTime: '8:00am',
+        maxTime: '7:00pm',
+        <% if (!event) { %>defaultTime: '9:00am',<% } %>
+        startTime: '8:00am',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+
+    $('#endtimepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 5,
+        minTime: '8:00am',
+        maxTime: '10:00pm',
+        <% if (!event) { %>defaultTime: '11:00am',<% } %>
+        startTime: '9:00am',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });   
+
+    $('#active').change(function(){
+     if($(this).attr('checked')){
+          $(this).val('TRUE');
+     } else{
+          $(this).val('FALSE');
+     }
+    });
+  });
+ </script>

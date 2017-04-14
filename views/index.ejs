@@ -1,0 +1,137 @@
+<%- layout('layout.ejs') %>
+<h3><%- the_title %></h3>
+
+<% if (current == 1){ %>
+  <div class="btn-group" role="group" aria-label="Event Configuration">
+      <button class="btn btn-success" title="Add Event" id="add"><a id="new" href="/event/add"><span>New</span></a></button>
+      <button class="btn btn-success" title="Click on Event Record to enable Update button" id="edit" disabled><a id="ed"><span>Update</span></a></button>
+  </div>
+ <table class="table">
+  <thead class="thead-default">
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Activity</th>
+      <th>isActive</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+        <% for(var i=0; i < events.length; i++) { %>
+          <tr id = <%- events[i].id %> >
+            <td><%- events[i].date %></td>
+            <td><%- events[i].time %></td>
+            <td><%- events[i].activity %></td>
+            <td><%- events[i].isActive %></td>
+            <td><%- events[i].createdAt %></td>           
+            <td><%- events[i].updatedAt %></td>
+            <td><button type="button" class="btn btn-default btn-sm" title="Remove Event" id="delete"><a class="del" id=<%- events[i].id %> 
+            href="/event/delete/<%- events[i].id %>">Remove</a></button></td>           
+          </tr>
+        <% } %>  
+ </tbody>
+</table>  
+<button class="btn btn-success" title="Clear Selected Row" id="clear"><span>Clear selected</span></button> 
+ <% } %>
+
+<% if (current == 2){ %>
+ <table class="table">
+  <thead class="thead-default">
+    <tr>
+      <th>Description</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+        <% for(var i=0; i < activities.length; i++) { %>
+          <tr id = <%- activities[i].id %> > 
+            <td><%- activities[i].description %></td>
+            <td><%- activities[i].createdAt %></td>
+            <td><%- activities[i].updatedAt %></td>
+            <td><button type="button" class="btn btn-default btn-sm" title="Remove Activity" id="delete"><a class="del" id=<%- activities[i].id %> 
+            href="/activity/delete/<%- activities[i].id %>">Remove</a></button></td>           
+          </tr>
+        <% } %>  
+ </tbody>
+</table>  
+<form method="post" action="activity/add">
+    <div class="form-group">
+        <input id="desc" class="form-control" name="description" placeholder="Description" required/>
+    </div>
+    <div class="btn-group" role="group" aria-label="Activity Configuration">
+        <button type="submit" class="btn btn-success" title="Add Activity" id="add"><a id="new"><span>New</span></a></button>
+        <button type="submit" class="btn btn-success" title="Click on Activity Record to enable Update button" id="edit" disabled><a id="ed"><span>Update</span></a></button>
+    </div>
+</form> 
+<button class="btn btn-success" title="Clear Selected Row" id="clear"><span>Clear selected</span></button> 
+ <% } %>
+<h4 class="error"><%- error%></h4>
+<script>
+
+  $(document).ready(function(){
+    <% if (current == 1){ %>
+    $('tr').click(function() {
+      $('tbody tr').removeClass('selected'); 
+      $('#edit').attr("disabled", !this.id);
+      if (this.id) {
+        document.getElementById(this.id).className = "selected";
+        $("#ed").attr("href", "/event/update/" + this.id);
+      } else {
+        $("#ed").attr("href", "");
+      } 
+    });  
+
+    $('.del').click(function(event) {
+      if (this.id)    
+        if (!confirm('Do you really want to delete this Event?'))
+          event.preventDefault();
+    });
+
+    $('#clear').click(function() {
+      $('tbody tr').removeClass('selected');   
+      $("#ed").attr("href", "");
+      $('#edit').attr("disabled", true);
+      $('#add').attr("disabled", false);
+    });
+         
+    <% } %>
+
+   <% if (current == 2){ %>
+    $('tr').click(function() {
+      $('tbody tr').removeClass('selected'); 
+      $('#edit').attr("disabled", !this.id);
+      $('#add').attr("disabled", Boolean(this.id));
+      if (this.id) {
+        $('#desc').attr("placeholder", "");
+        $('#desc').val(document.getElementById(this.id).firstElementChild.innerHTML);
+        document.getElementById(this.id).className = "selected";
+        $("form").attr("action", "/activity/update/" + this.id);
+      } else {
+        $('#desc').val('');
+        $('#desc').attr("placeholder", "Description");
+        $("form").attr("action", "/activity/add");
+      } 
+    });  
+
+    $('.del').click(function(event) {
+      if (this.id)    
+        if (!confirm('Do you really want to delete this Activity?'))
+          event.preventDefault();
+    });
+
+    $('#clear').click(function() {
+      $('tbody tr').removeClass('selected');   
+      $('#desc').val('');
+      $('#desc').attr("placeholder", "Description");
+      $("form").attr("action", "/activity/add");
+      $('#edit').attr("disabled", true);
+      $('#add').attr("disabled", false);
+    });
+    <% } %>
+  });  
+
+</script> 

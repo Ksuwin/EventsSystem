@@ -1,0 +1,107 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #E0EEE0;
+}
+
+.header,
+.footer {
+  padding-right: 15px;
+  padding-left: 5px;
+}
+
+.header {
+  padding-bottom: 80px;
+}
+
+.nav {
+  font-size: 16px;
+}
+
+.nav > li > a {
+  color: black;
+}
+
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover, 
+.nav-pills > li.active > a:focus {
+    background-color: #FF9009;
+}
+
+.footer {
+  padding-top: 19px;
+  color: white;
+  border-top: 2px solid #e5e5e5;
+  background: #B7C8B6;
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (max-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .footer {
+    padding-right: 0;
+    padding-left: 10;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }  
+}
+
+footer {
+  margin-top: 80px;
+}
+
+.selected {
+  background-color: #DCDCDC;
+}
+
+thead {
+  color: #118C4E;
+  font-size: 16px;
+}
+
+.successful {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.btn-group {
+  margin-bottom: 20px;
+}
+
+form, table {
+  margin-top: 10px;  
+}
+
+input, select {
+  max-width: 600px;
+
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table, th, td {
+   border: 1px solid #4CAF50;
+}
+
+span {
+    color: white;
+}
+#datepicker, #starttimepicker, #endtimepicker {
+   max-width: 300px; 
+}
+

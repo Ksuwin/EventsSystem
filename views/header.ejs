@@ -1,0 +1,11 @@
+<header class="header">
+  <% if (current) {%>
+    <nav>
+        <ul class="nav nav-pills pull-left red">
+            <li <%if (current === 1) { %> class="active"<% } %>><a href="/event">Events</a></li>
+            <li <%if (current === 2) { %> class="active"<% } %>><a href="/activity">Activities</a></li>
+            <li><a href="/">Current Week Events</a></li>
+        </ul>
+    </nav>
+  <% } %>
+</header>
