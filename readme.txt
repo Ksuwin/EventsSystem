@@ -3,7 +3,8 @@ Events System (Express.js, Angular2, EJS)
 
 For this App I used: 
 
-- Express.js: web application that serves Angular2 web site and ejs views. I developed RESTful APIs to process http-requests from client side. 
+- Express.js: web application that serves Angular2 web site and ejs views. I developed RESTful APIs to process 
+  http-requests from client side. 
 
 - Angular2 CLI: main web page with current week events.
 
