@@ -1,4 +1,3 @@
-# EventsSystem
 Events System (Express.js, Angular2, EJS)
 
 For this App I used: 
