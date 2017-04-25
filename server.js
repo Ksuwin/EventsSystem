@@ -40,13 +40,6 @@ app.use(function(req, res, next){
 app.use('/event', eventRoutes);
 app.use('/activity', activityRoutes);
 
-// catch 404
-/*app.use(function(req, res, next) {
-  var err = new Error('Resource is not found');
-  res.writeHead(404, {'Content-Type': 'text/html' });
-  res.end('<h3 style="color:red">Error:' + err.message + '</h3>');
-});*/
-
 app.listen(config.port, function() {
     console.log('Server started on port ' + config.port);
 });
